@@ -1,0 +1,17 @@
+{
+    "presets": [
+        [
+            "@babel/env",
+            {
+                "targets": {
+                    "node": "current"
+                },
+                "modules": "commonjs",
+                "spec": true
+            }
+        ]
+    ],
+    "plugins": [
+        ["@babel/plugin-proposal-class-properties", { "loose": false }]
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "restartable": "rs",
+    "ignore": [".git", "node_modules/**/node_modules"],
+    "verbose": false,
+    "watch": ["./source", "./package.json", "./swagger"],
+    "env": {
+        "NODE_ENV": "development"
+    },
+    "exec": "node -r dotenv/config -r @babel/register ./source/index.js",
+    "ext": "js, yaml, yml"
+}
