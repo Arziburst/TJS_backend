@@ -1,8 +1,12 @@
 // Core
 import mongoose from 'mongoose';
+import leanVirtuals from 'mongoose-lean-virtuals';
 
 // Plugins
 import { hashPlugin } from '../helpers/plugins';
+
+// Constants
+const WEEK = 604800000;
 
 // Document shape
 const schema = new mongoose.Schema({
@@ -43,14 +47,20 @@ const schema = new mongoose.Schema({
         type:    Number,
         default: 0,
     },
-},
-{
+}, {
     timestamps: {
         createdAt: 'created',
         updatedAt: 'modified',
     },
 });
 
+schema.virtual('isNew').get(function () {
+    const { created } = this;
+
+    return Date.now() - new Date(created).getTime() < WEEK;
+});
+
+schema.plugin(leanVirtuals);
 schema.plugin(hashPlugin, { index: true });
 
 // Collection

@@ -45,8 +45,7 @@ const schema = new mongoose.Schema({
         type:    Number,
         default: 1,
     },
-},
-{
+}, {
     timestamps: {
         createdAt: 'created',
         updatedAt: 'modified',

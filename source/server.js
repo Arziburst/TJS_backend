@@ -23,16 +23,16 @@ const app = express();
 const debug = dg('server:init');
 const MongoStore = connectMongo(session);
 
-const { 
+const {
     CLOUD_NAME,
     API_KEY,
-    API_SECRET
+    API_SECRET,
 } = getCloudinaryEnv();
 
 cloudinary.config({
     cloud_name: CLOUD_NAME,
-    api_key: API_KEY,
-    api_secret: API_SECRET
+    api_key:    API_KEY,
+    api_secret: API_SECRET,
 });
 
 const ttl = process.env.NODE_ENV === 'development'
@@ -58,7 +58,7 @@ const sessionOptions = {
 
 app.disable('x-powered-by');
 app.use(cors({ credentials: true, origin: process.env.ROOT_URL }));
-app.use(formData.parse())
+app.use(formData.parse());
 app.use(bodyParser.json());
 app.set('trust proxy', 1);
 app.use(session(sessionOptions));

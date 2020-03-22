@@ -9,8 +9,7 @@ const schema = new mongoose.Schema({
         index:    true,
     },
     viewedProducts: [ String ],
-},
-{
+}, {
     timestamps: {
         createdAt: 'created',
         updatedAt: 'modified',

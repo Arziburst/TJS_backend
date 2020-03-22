@@ -9,6 +9,7 @@ export class Orders {
     async find() {
         const data = await orders.find()
             .select('-_id -userHash -__v -modified')
+            .sort({ created: 1 })
             .lean();
 
         return data;

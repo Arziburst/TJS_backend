@@ -25,8 +25,7 @@ const schema = new mongoose.Schema({
         type:    String,
         default: 'customer',
     },
-},
-{
+}, {
     timestamps: {
         createdAt: 'created',
         updatedAt: 'modified',
