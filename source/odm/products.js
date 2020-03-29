@@ -54,6 +54,8 @@ const schema = new mongoose.Schema({
     },
 });
 
+schema.set('id', false);
+
 schema.virtual('isNew').get(function () {
     const { created } = this;
 
