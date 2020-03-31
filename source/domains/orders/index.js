@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 // Core
 import dg from 'debug';
 import moment from 'moment';
