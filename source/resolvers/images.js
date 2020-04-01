@@ -4,7 +4,7 @@ import { images } from '../odm';
 export const imagesResolver = {
     find: async () => {
         const data = await images.find()
-            .select('-__v -created -modified')
+            .select('-_id -__v -created -modified')
             .lean();
 
         return data;
@@ -20,5 +20,5 @@ export const imagesResolver = {
         await images.findOneAndRemove({ public_id });
 
         return true;
-    }
+    },
 };

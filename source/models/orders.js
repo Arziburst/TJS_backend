@@ -32,7 +32,7 @@ export class Orders {
     async findOne() {
         const hash = this.data;
         const data = await orders.findOne({ hash })
-            .select('-_id -__v -modified')
+            .select('-_id -__v -modified -userHash')
             .lean();
 
         return data;
