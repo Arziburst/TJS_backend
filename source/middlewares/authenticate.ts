@@ -1,10 +1,13 @@
+// Types
+import { NextFunction, Response } from 'express';
+
 // Instruments
-import { NotFoundError } from './';
+import { NotFoundError } from '../helpers';
 
 // Controllers
 import { Users } from '../controllers';
 
-export const authenticate = async (req, res, next) => {
+export const authenticate = async (req: Request, res: Response, next: NextFunction) => {
     if (!req.session.user) {
         return next(new NotFoundError('cookie not found', 401));
     }

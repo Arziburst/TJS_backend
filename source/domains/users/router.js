@@ -13,8 +13,8 @@ import userSchema from './_schemas/userSchema';
 
 const route = express.Router();
 
-route.get('/', [authenticate, checkRole('admin') ], users.get);
-route.post('/', [validator(userSchema) ], users.post);
+route.get('/', [ authenticate, checkRole('admin') ], users.get);
+route.post('/', [ validator(userSchema) ], users.post);
 
 route.get('/:hash', [ authenticate, userSelfCRUD ], user.get);
 route.put('/:hash', [ authenticate, userSelfCRUD ], [ validator(userSchema) ], user.put);

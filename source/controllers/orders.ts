@@ -1,7 +1,7 @@
 import { Orders as OrdersModel } from '../models';
 
 // Models
-import { Products } from './';
+import { Products } from '.';
 
 export class Orders {
     constructor(data) {

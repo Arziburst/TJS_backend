@@ -1,6 +1,12 @@
 // Core
-import express from 'express';
+import express, {
+    Request,
+    Response,
+    NextFunction,
+    Application,
+} from 'express';
 import session from 'express-session';
+import helmet from 'helmet';
 import mongoose from 'mongoose';
 import connectMongo from 'connect-mongo';
 import cors from 'cors';
@@ -13,12 +19,15 @@ import dg from 'debug';
 import * as domains from './domains';
 
 // Instruments
-import { requireJsonContent, getPassword, NotFoundError, getCloudinaryEnv } from './helpers';
+import { 
+    requireJsonContent, getPassword, getCloudinaryEnv,
+    NotFoundError, ValidationError,
+ } from './helpers';
 
 // Initialize DB connection
 import './db';
 
-const app = express();
+const app: Application = express();
 
 const debug = dg('server:init');
 const MongoStore = connectMongo(session);
@@ -29,15 +38,19 @@ const {
     API_SECRET,
 } = getCloudinaryEnv();
 
+type Cloud = {
+    cloud_name: string;
+    api_key: string;
+    api_secret: string;
+}
+
 cloudinary.config({
     cloud_name: CLOUD_NAME,
     api_key:    API_KEY,
     api_secret: API_SECRET,
 });
 
-const ttl = process.env.NODE_ENV === 'development'
-    ? 8 * 60 * 60 * 1000
-    : 1000 * 60 * 60 * 24 * 7;
+const ttl = 1000 * 60 * 60 * 24 * 7;
 
 const sessionOptions = {
     name:              'user',
@@ -57,9 +70,14 @@ const sessionOptions = {
 };
 
 app.disable('x-powered-by');
+app.use(helmet());
 app.use(cors({ credentials: true, origin: process.env.ROOT_URL }));
 app.use(formData.parse());
-app.use(bodyParser.json());
+app.use(
+    bodyParser.json({
+        limit: '10kb',
+    }),
+);
 app.set('trust proxy', 1);
 app.use(session(sessionOptions));
 app.use(requireJsonContent);
@@ -85,22 +103,22 @@ app.get('/api/ping', (req, res) => {
     res.sendStatus(204);
 });
 
-app.use('*', (req, res, next) => {
-    const error = new NotFoundError(
-        `Can not find right route for method ${req.method} and path ${req.originalUrl}`,
-        404,
-    );
+app.use('*', (req: Request, res: Response, next: NextFunction) => {
+    const error = new NotFoundError(`Route not found ${req.method} — '${req.originalUrl}'`, 404);
     next(error);
 });
 
-app.use((error, req, res, next) => {
-    const { name, message, statusCode } = error;
-    const errorMessage = `${name}: ${message}`;
+app.use(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    (error: ValidationError | NotFoundError, req: Request, res: Response, next: NextFunction) => {
+        const { name, message, statusCode } = error;
+        const errorMessage = `${name}: ${message}`;
 
-    debug(`Error: ${errorMessage}`);
+        debug(`Error: ${errorMessage}`);
 
-    const status = statusCode || 500;
-    res.status(status).json({ message: message });
-});
+        const status = statusCode || 500;
+        res.status(status).json({ message });
+    },
+);
 
 export { app };

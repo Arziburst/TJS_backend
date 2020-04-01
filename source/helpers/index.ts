@@ -11,7 +11,7 @@ export {
     getTelegramApiUrl,
     getCloudinaryEnv
 } from './env';
-export { authenticate } from './authenticate';
+export { authenticate } from '../middlewares/authenticate';
 export { checkRole } from './checkRole';
 export { userSelfCRUD } from './userSelfCRUD';
 export { discountHandler } from './discountHandler';

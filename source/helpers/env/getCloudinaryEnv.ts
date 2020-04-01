@@ -16,6 +16,6 @@ export const getCloudinaryEnv = () => {
     return {
         CLOUD_NAME,
         API_KEY,
-        API_SECRET
+        API_SECRET,
     };
 };

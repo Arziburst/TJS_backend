@@ -1,4 +1,6 @@
-export const userSelfCRUD = (req, res, next) => {
+import { Request, Response, NextFunction } from 'express'
+
+export const userSelfCRUD = (req: Request, res: Response, next: NextFunction) => {
     if (req.params.hash === req.session.user.hash) {
         next();
     } else {
