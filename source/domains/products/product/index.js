@@ -57,7 +57,7 @@ export const incrementViews = async (req, res) => {
         const ipAdress = req.headers[ 'x-forwarded-for' ] || req.connection.remoteAddress;
         const foundedIpAdress = await viewsResolver.findOne(ipAdress);
         const product = new Products(req.params.hash);
-        let data = null;
+        let data = false;
 
         if (foundedIpAdress) {
             const { viewedProducts } = foundedIpAdress;
