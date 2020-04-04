@@ -1,35 +1,28 @@
 // Core
-import express, {
-    Request,
-    Response,
-    NextFunction,
-    Application,
-} from 'express';
-import session from 'express-session';
+import express, { Request, Response, NextFunction, Application } from 'express';
+import session, { SessionOptions } from 'express-session';
 import helmet from 'helmet';
 import mongoose from 'mongoose';
 import connectMongo from 'connect-mongo';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import formData from 'express-form-data';
-import cloudinary from 'cloudinary';
+import { v2 as cloudinary } from 'cloudinary';
 import dg from 'debug';
 
 // Routes
-import * as domains from './domains';
+import { products, images, users, bot, profile, orders } from './domains';
 
 // Instruments
-import { 
-    requireJsonContent, getPassword, getCloudinaryEnv,
-    NotFoundError, ValidationError,
- } from './helpers';
+import { getPassword, getCloudinaryEnv, NotFoundError, ValidationError, } from './helpers';
+import { requireJsonContent } from './middlewares';
 
 // Initialize DB connection
 import './db';
 
 const app: Application = express();
-
 const debug = dg('server:init');
+
 const MongoStore = connectMongo(session);
 
 const {
@@ -37,12 +30,6 @@ const {
     API_KEY,
     API_SECRET,
 } = getCloudinaryEnv();
-
-type Cloud = {
-    cloud_name: string;
-    api_key: string;
-    api_secret: string;
-}
 
 cloudinary.config({
     cloud_name: CLOUD_NAME,
@@ -52,7 +39,7 @@ cloudinary.config({
 
 const ttl = 1000 * 60 * 60 * 24 * 7;
 
-const sessionOptions = {
+const sessionOptions: SessionOptions = {
     name:              'user',
     secret:            getPassword(),
     resave:            false,
@@ -93,12 +80,14 @@ if (process.env.NODE_ENV === 'development') {
     });
 }
 
-app.use('/api/profile', domains.profile);
-app.use('/api/users', domains.users);
-app.use('/api/products', domains.products);
-app.use('/api/orders', domains.orders);
-app.use('/api/bot', domains.bot);
-app.use('/api/images', domains.images);
+app.use('/api', [ 
+    products,
+    profile,
+    images,
+    orders,
+    users,
+    bot,
+ ]);
 app.get('/api/ping', (req, res) => {
     res.sendStatus(204);
 });

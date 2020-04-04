@@ -14,6 +14,10 @@
         "paths": {
             "*": ["node_modules/@ts-typings/*"]
         },
+        "typeRoots": [
+            "node_modules/@types",
+            "source/@interfaces"
+        ],
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "strict": true,
