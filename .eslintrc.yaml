@@ -1,6 +1,4 @@
-# parser: '@typescript-eslint/parser'
-parser: babel-eslint
-
+parser: '@typescript-eslint/parser'
 
 parserOptions:
     ecmaVersion: 2018
@@ -16,8 +14,7 @@ env:
     es6: true
 
 plugins:
-    - babel
-    # - "@typescript-eslint"
+    - "@typescript-eslint"
 
 rules:
         # ESLint: possible errors
@@ -58,7 +55,7 @@ rules:
     valid-jsdoc: 2
     valid-typeof: 2
 
-        # ESLint: base practices
+    # ESLint: base practices
     accessor-pairs: 2
     array-callback-return: 2
     block-scoped-var: 2
@@ -317,16 +314,6 @@ rules:
         - 2
         - never
 
-        # ECMAScript 6
+    # ECMAScript 6
     arrow-body-style: 0
     arrow-parens: [2, 'always']
-
-        # Babel
-    babel/no-invalid-this: 0
-    babel/quotes:
-        - 2
-        - single
-    babel/new-cap: 0
-
-        # TypeScript
-    # "@typescript-eslint/no-unused-vars": 2

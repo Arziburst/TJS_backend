@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "declaration": true,
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "outDir": "./build",
+        "baseUrl": "./",
+        "incremental": true,
+        "skipLibCheck": true,
+        "paths": {
+            "*": ["node_modules/@ts-typings/*"]
+        },
+        "typeRoots": [
+            "node_modules/@types",
+            "source/@interfaces"
+        ],
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true
+    },
+    "include": ["source"],
+    "exclude": ["node_modules", "build"]
+}

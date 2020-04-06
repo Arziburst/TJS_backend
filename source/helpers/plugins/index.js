@@ -1,1 +1,0 @@
-export { hashPlugin } from './hashPlugin';
