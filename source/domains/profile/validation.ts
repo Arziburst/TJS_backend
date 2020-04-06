@@ -1,9 +1,8 @@
-export default {
+export const registrationSchema = {
     type:       'object',
     properties: {
         name: {
-            type:      'string',
-            minLength: 2,
+            type: 'string',
         },
         email: {
             type: 'string',
@@ -15,6 +14,5 @@ export default {
             type: 'string',
         },
     },
-    required:             [ 'email', 'phone', 'password' ],
     additionalProperties: false,
 };

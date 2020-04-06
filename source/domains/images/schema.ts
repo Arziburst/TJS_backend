@@ -3,23 +3,23 @@ import mongoose, { Document } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
 // Types
-import { ImageCore } from './types'
+import { ImageCore } from './types';
 
 export interface IImagesModel extends Document, ImageCore {}
 
 // Document shape
 const schema = new mongoose.Schema({
     imageUrl: {
-        type: String,
+        type:     String,
         required: true,
     },
     public_id: {
-        type: String,
+        type:     String,
         required: true,
-        unique: true
+        unique:   true,
     },
 }, {
-    id: false,
+    id:         false,
     versionKey: false,
 });
 

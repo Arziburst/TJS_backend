@@ -1,15 +1,30 @@
-
-
-
-// export const isProduct = (Product: object): Product is Product => {
-//     if (typeof Product !== 'object') {
-//         return false;
-//     }
-
-//     return (
-//         typeof (Product as Product).id === 'string'
-//         && typeof (Product as Product).email === 'string'
-//         && typeof (Product as Product).fname === 'string'
-//         && typeof (Product as Product).lname === 'string'
-//     );
-// };
+export const productSchema = {
+    type:       'object',
+    properties: {
+        title: {
+            type: 'string',
+        },
+        description: {
+            type: 'string',
+        },
+        type: {
+            type: 'string',
+        },
+        price: {
+            type: [ 'number', 'string' ],
+        },
+        discount: {
+            type: [ 'number', 'string' ],
+        },
+        available: {
+            type: 'boolean',
+        },
+        weight: {
+            type: [ 'number', 'string' ],
+        },
+        images: {
+            type: 'array',
+        },
+    },
+    additionalProperties: false,
+};

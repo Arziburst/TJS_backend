@@ -14,7 +14,7 @@ import dg from 'debug';
 import { products, images, users, bot, profile, orders } from './domains';
 
 // Instruments
-import { getPassword, getCloudinaryEnv, NotFoundError, ValidationError, } from './helpers';
+import { getPassword, getCloudinaryEnv, NotFoundError, ValidationError } from './helpers';
 import { requireJsonContent } from './middlewares';
 
 // Initialize DB connection
@@ -80,14 +80,14 @@ if (process.env.NODE_ENV === 'development') {
     });
 }
 
-app.use('/api', [ 
+app.use('/api', [
     products,
     profile,
     images,
     orders,
     users,
     bot,
- ]);
+]);
 app.get('/api/ping', (req, res) => {
     res.sendStatus(204);
 });

@@ -38,7 +38,7 @@ class OrdersController {
             .lean();
 
         if (!data) {
-            throw new Error('Orders find many failed by user Id:.')        
+            throw new Error('Orders find many failed by user Id:.');
         }
 
         return data;

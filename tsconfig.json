@@ -7,7 +7,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "sourceMap": true,
-        "outDir": "./dist",
+        "outDir": "./build",
         "baseUrl": "./",
         "incremental": true,
         "skipLibCheck": true,
@@ -26,6 +26,6 @@
         "resolveJsonModule": true,
         "isolatedModules": true
     },
-    "include": ["./source/**/*"],
-    "exclude": ["node_modules", "dist"]
+    "include": ["source"],
+    "exclude": ["node_modules", "build"]
 }

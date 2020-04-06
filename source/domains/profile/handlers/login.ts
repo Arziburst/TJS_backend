@@ -3,7 +3,7 @@ import { Response } from 'express';
 import dg from 'debug';
 
 // Types
-import { IRequestWithSession } from '../../../@interfaces'
+import { IRequestWithSession } from '../../../@interfaces';
 
 // Instruments
 import { Users } from '../../users/controller';
@@ -18,8 +18,8 @@ export const login = async (req: IRequestWithSession, res: Response) => {
             throw new Error('credentials are not valid');
         }
 
-        const [, credentials] = req.headers.authorization.split(' ');
-        const [email, password] = credentials
+        const [ , credentials ] = req.headers.authorization.split(' ');
+        const [ email, password ] = credentials
 
             // Buffer.from(credentials, 'base64')
             // .toString()
@@ -28,13 +28,13 @@ export const login = async (req: IRequestWithSession, res: Response) => {
         const _id = await Users.login({ email, password });
 
         if (!_id) {
-            throw new Error(`Login method do not return valid _id`)
+            throw new Error(`Login method do not return valid _id`);
         }
 
         const profile = await Users.findById(_id);
 
         if (!profile) {
-            throw new Error(`Can't find profile by _id: ${_id}`)
+            throw new Error(`Can't find profile by _id: ${_id}`);
         }
 
         req.session!.user = { _id };

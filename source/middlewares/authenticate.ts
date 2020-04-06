@@ -18,7 +18,7 @@ export const authenticate = async (req: AuthenticateRequest, res: Response, next
     }
 
     const { _id } = req.session.user;
-    
+
     const userRole = await Users.getRole(_id);
 
     if (userRole) {

@@ -8,7 +8,6 @@ import { OrderCore } from './types'
 export interface IOrdersModel extends Document, OrderCore {}
 
 // Document shape
-// Document shape
 const schema = new mongoose.Schema({
     orderedProducts: [
         {

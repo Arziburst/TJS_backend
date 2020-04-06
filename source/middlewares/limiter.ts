@@ -4,6 +4,6 @@ type limiterType = (numRequest: number, resetIn: number) => rateLimit.RateLimit;
 
 export const limiter: limiterType = (numRequest, resetIn) => rateLimit({
     windowMs: resetIn,
-    max: numRequest,
-    headers: false,
+    max:      numRequest,
+    headers:  false,
 });

@@ -1,18 +1,7 @@
-export const editOrderSchema = {
-    type: 'object',
-    properties: {
-        status: {
-            type: ['string', 'number'],
-        },
-    },
-    required: ['status'],
-    additionalProperties: false,
-};
-
 export const orderSchema = {
-    type: 'object',
+    type:       'object',
     properties: {
-        orderedProducts: {
+        orderedPIDs: {
             type: 'array',
         },
         phone: {
@@ -22,19 +11,17 @@ export const orderSchema = {
             type: 'string',
         },
     },
-    required: ['phone', 'orderedProducts'],
+    required:             [ 'phone', 'orderedPIDs' ],
     additionalProperties: false,
 };
 
-// export const isProduct = (Product: object): Product is Product => {
-//     if (typeof Product !== 'object') {
-//         return false;
-//     }
-
-//     return (
-//         typeof (Product as Product).id === 'string'
-//         && typeof (Product as Product).email === 'string'
-//         && typeof (Product as Product).fname === 'string'
-//         && typeof (Product as Product).lname === 'string'
-//     );
-// };
+export const editOrderSchema = {
+    type:       'object',
+    properties: {
+        status: {
+            type: 'number',
+        },
+    },
+    required:             [ 'status' ],
+    additionalProperties: false,
+};
