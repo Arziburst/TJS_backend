@@ -10,7 +10,7 @@ export interface ProductCore {
     views?: number;
     readonly created?: Date;
     readonly isProductNew?: boolean;
-};
+}
 
 export interface Product extends ProductCore {
     readonly _id: string;

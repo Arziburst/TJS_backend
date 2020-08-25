@@ -12,11 +12,3 @@ export const createBundledAnalyzer = (): Configuration => ({
         }),
     ],
 });
-
-export const createEnvVariables = (): Configuration => ({
-    plugins: [
-        new DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-        }),
-    ],
-});

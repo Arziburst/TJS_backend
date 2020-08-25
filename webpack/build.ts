@@ -8,7 +8,7 @@ import { entry, build } from './paths';
 
 // Instruments
 import merge from 'webpack-merge';
-import { createBundledAnalyzer, createEnvVariables } from './modules';
+import { createBundledAnalyzer } from './modules';
 
 const config = merge(
     {
@@ -20,7 +20,7 @@ const config = merge(
             filename: 'index.js',
         },
         resolve: {
-            extensions: ['.ts'],
+            extensions: [ '.ts' ],
         },
         externals: [ excludeNodeModules() ],
         module:    {
@@ -35,7 +35,6 @@ const config = merge(
         },
     },
     createBundledAnalyzer(),
-    // process.env.NODE_ENV === 'production' && createEnvVariables(),
 );
 
 const compiler = webpack(config);
@@ -53,17 +52,17 @@ compiler.run((error, stats) => {
     }
 
     const info = stats.toString({
-        colors: true,
-        hash: true,
-        version: true,
-        timings: true,
-        env: true,
-        chunks: false,
-        modules: false,
-        children: false,
+        colors:     true,
+        hash:       true,
+        version:    true,
+        timings:    true,
+        env:        true,
+        chunks:     false,
+        modules:    false,
+        children:   false,
         publicPath: true,
-        reasons: true,
-        source: false,
+        reasons:    true,
+        source:     false,
     });
 
     console.log(chalk.greenBright('✓ Build completed'));

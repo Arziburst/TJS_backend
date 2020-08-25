@@ -24,7 +24,7 @@ export const postOne = async (req: IRequest, res: Response) => {
         const product = await Products.findById(newProduct._id);
 
         if (!product) {
-            throw Error('postProduct => not found!')
+            throw Error('postProduct => not found!');
         }
 
         res.status(201).json({ data: product });

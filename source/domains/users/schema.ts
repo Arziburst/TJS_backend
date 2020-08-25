@@ -3,33 +3,33 @@ import mongoose, { Document } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
 // Types
-import { UserCore } from './types'
+import { UserCore } from './types';
 
 export interface IUsersModel extends Document, UserCore {}
 
 const schema = new mongoose.Schema({
-    name: String,
+    name:  String,
     phone: {
-        type: String,
+        type:     String,
         required: true,
-        unique: true,
+        unique:   true,
     },
     email: {
-        type: String,
+        type:     String,
         required: true,
-        unique: true,
+        unique:   true,
     },
     password: {
-        type: String,
+        type:     String,
         required: true,
     },
     role: {
-        type: String,
+        type:    String,
         default: 'customer',
     },
 }, {
     timestamps: { createdAt: 'created', updatedAt: false },
-    id: false,
+    id:         false,
     versionKey: false,
 });
 

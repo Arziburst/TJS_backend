@@ -17,7 +17,7 @@ export const sayHello = async (req: Request, res: Response) => {
     try {
         await axios.post(`${TELEGRAM_API_URL}/sendMessage`, {
             chat_id: TELEGRAM_GROUP_ID,
-            text: 'Белочка на связи!',
+            text:    'Белочка на связи!',
         });
 
         res.sendStatus(204);
