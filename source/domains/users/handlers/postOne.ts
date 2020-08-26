@@ -18,7 +18,7 @@ export const postOne = async (req: IRequest, res: Response) => {
     debug(`${req.method} — ${req.originalUrl}`);
 
     try {
-        const body = req.body
+        const body = req.body;
 
         const { _id } = await Users.register(body);
 

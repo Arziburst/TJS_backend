@@ -3,7 +3,7 @@ import { Response } from 'express';
 import dg from 'debug';
 
 // Types
-import { IRequestWithSession } from '../../../@interfaces'
+import { IRequestWithSession } from '../../../@interfaces';
 import { Order } from '../types';
 
 // Instruments
@@ -19,11 +19,10 @@ export const getAll = async (req: GetAllOrders, res: Response) => {
     debug(`${req.method} — ${req.originalUrl}`);
 
     try {
-        
         if (!req.session?.user?._id) {
             throw new Error('session expired');
         }
-        
+
         let data: Array<Order> = [];
         const { _id: userId } = req.session.user;
 

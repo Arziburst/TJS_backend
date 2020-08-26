@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import dg from 'debug';
 
 // Types
-import { Order } from '../types'
+import { Order } from '../types';
 
 // Instruments
 import { Orders } from '../controller';
@@ -21,7 +21,7 @@ export const putOne = async (req: IRequest, res: Response) => {
         const _id = req.params._id;
 
         if (!_id) {
-            throw new Error('Oreder put failed')
+            throw new Error('Oreder put failed');
         }
 
         const body = req.body;

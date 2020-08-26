@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response, NextFunction } from 'express';
 
 export const requireJsonContent = (req: Request, res: Response, next: NextFunction) => {
     if (req.method === 'GET') {

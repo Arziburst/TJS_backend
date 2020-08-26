@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import dg from 'debug';
 
 // Types
-import { User } from '../types'
+import { User } from '../types';
 
 // Instruments
 import { Users } from '../controller';

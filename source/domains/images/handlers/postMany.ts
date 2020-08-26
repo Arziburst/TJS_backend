@@ -12,6 +12,8 @@ interface IRequest extends Request {
     files?: Array<File & { path: string; }>
 }
 
+type CloudinaryResonse = Array<{ secure_url: string, public_id: string }>;
+
 export const postMany = async (req: IRequest, res: Response) => {
     debug(`${req.method} — ${req.originalUrl}`);
 
@@ -23,9 +25,9 @@ export const postMany = async (req: IRequest, res: Response) => {
         const values = Object.values(req.files);
         const promises = values.map((image) => cloudinary.uploader.upload(image.path));
 
-        const response: Array<{ url: string, public_id: string }> = await Promise.all(promises);
-        const imagesUrlsArray = response.map(({ url, public_id }) => ({
-            imageUrl: url, public_id,
+        const response: CloudinaryResonse = await Promise.all(promises);
+        const imagesUrlsArray = response.map(({ secure_url, public_id }) => ({
+            imageUrl: secure_url, public_id,
         }));
 
         const data = await Images.insertMany(imagesUrlsArray);

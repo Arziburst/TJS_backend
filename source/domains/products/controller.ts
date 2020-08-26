@@ -58,7 +58,9 @@ class ProductsController {
     }
 
     async findOneAndUpdateViews(_id: string): Promise<Product | null> {
-        const result = await this.odm.findOneAndUpdate({ _id }, { $inc: { views: 1 } }, { new: true })
+        const result = await this.odm.findOneAndUpdate(
+            { _id }, { $inc: { views: 1 } }, { new: true },
+        )
             .select('')
             .lean({ virtuals: true });
 

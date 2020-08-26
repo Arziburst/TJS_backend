@@ -13,7 +13,7 @@ export interface OrderCore {
     readonly comment?: string,
     status?: number,
     readonly created?: Date;
-};
+}
 
 export interface Order extends OrderCore {
     readonly _id: string;

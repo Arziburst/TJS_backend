@@ -41,22 +41,24 @@ export const postOne = async (req: IRequest, res: Response) => {
     try {
         const body = req.body;
         let data: OrderCore = {
-            comment: body.comment,
-            phone: body.phone,
+            comment:         body.comment,
+            phone:           body.phone,
             orderedProducts: [],
         };
         const sessionUID = req.session?.user?._id;
         const foundedProductsByPIDs = await Products.findByIdsArray(body.orderedPIDs);
-        
-        const { total, orderedProducts } = foundedProductsByPIDs.reduce((acc, foundedProductByPID) => {
+
+        const { total, orderedProducts } = foundedProductsByPIDs.reduce((
+            acc, foundedProductByPID,
+        ) => {
             const result = discountHandler(foundedProductByPID.price, foundedProductByPID.discount);
 
             return {
                 orderedProducts: [
                     ...acc.orderedProducts,
                     {
-                        pid: foundedProductByPID._id,
-                        image: foundedProductByPID.images[0],
+                        pid:   foundedProductByPID._id,
+                        image: foundedProductByPID.images[ 0 ],
                         price: result,
                     },
                 ],
@@ -89,13 +91,13 @@ export const postOne = async (req: IRequest, res: Response) => {
         const newOrder = await Orders.create(data);
 
         if (!newOrder) {
-            throw new Error('Order creation failed')
+            throw new Error('Order creation failed');
         }
 
         const foundedOrder = await Orders.findById(newOrder._id);
 
         if (!foundedOrder) {
-            throw new Error('New order find failed')
+            throw new Error('New order find failed');
         }
 
         const { created, phone, comment, _id } = foundedOrder;
@@ -103,9 +105,9 @@ export const postOne = async (req: IRequest, res: Response) => {
             .format('MMMM Do YYYY, h:mm:ss a');
 
         await axios.post(`${TELEGRAM_API_URL}/sendMessage`, {
-            chat_id: TELEGRAM_GROUP_ID,
+            chat_id:    TELEGRAM_GROUP_ID,
             parse_mode: 'HTML',
-            text: `Заказ: <a href ='http://tjstore.pp.ua/orders/${_id}'>${_id}</a>\nНа сумму: ${total} грн.\nКол-во: ${orderedProducts.length}\nСоздан: ${parsedCreated}\n${comment && `Комментарий: ${comment}\n`}Телефон: <a href='tel:${phone}'>${phone}</a>.`,
+            text:       `Заказ: <a href ='http://tjstore.pp.ua/orders/${_id}'>${_id}</a>\nНа сумму: ${total} грн.\nКол-во: ${orderedProducts.length}\nСоздан: ${parsedCreated}\n${comment && `Комментарий: ${comment}\n`}Телефон: <a href='tel:${phone}'>${phone}</a>.`,
         });
 
         res.status(201).json({ data: foundedOrder });

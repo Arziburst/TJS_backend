@@ -6,7 +6,7 @@ export class NotFoundError extends Error {
 
     constructor(...args: [string, number?]) {
         super(args[ 0 ]);
-        const [, statusCode = 404] = args;
+        const [ , statusCode = 404 ] = args;
 
         if (typeof statusCode !== 'number') {
             throw new Error('can not construct NotFoundError due to arguments error');

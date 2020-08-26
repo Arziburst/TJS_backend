@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import dg from 'debug';
 
 // Types
-import { Product } from '../types'
+import { Product } from '../types';
 
 // Instruments
 import { Products } from '../controller';

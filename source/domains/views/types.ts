@@ -3,7 +3,7 @@ export interface ViewsCore {
     viewedProducts: Array<string>;
     readonly created?: Date;
     modified?: string;
-};
+}
 
 export interface Views extends ViewsCore {
     readonly _id: string;

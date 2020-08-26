@@ -14,7 +14,7 @@ export const deleteOne = async (req: Request, res: Response) => {
         const _id = req.params._id;
 
         if (!_id) {
-            throw new Error('Oreder delete failed on _id check stage')
+            throw new Error('Oreder delete failed on _id check stage');
         }
 
         const isDeleted = await Orders.findOneAndRemove(_id);

@@ -5,7 +5,7 @@ export interface UserCore {
     password?: string;
     readonly role?: string;
     readonly created?: Date;
-};
+}
 
 export interface User extends UserCore {
     readonly _id: string;

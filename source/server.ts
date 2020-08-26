@@ -51,21 +51,25 @@ const sessionOptions: SessionOptions = {
     }),
     cookie: {
         httpOnly: true,
-        secure:   false,
+        sameSite: 'lax',
         maxAge:   ttl,
     },
 };
 
 app.disable('x-powered-by');
 app.use(helmet());
-app.use(cors({ credentials: true, origin: process.env.ROOT_URL }));
+app.use(cors({
+    credentials: true,
+    origin:      [
+        'http://localhost',
+        'http://localhost:3000', // dev
+        'http://localhost:5000', // serve
+        'http://192.168.99.100', // w10 docker
+        'https://tjstore.pp.ua', // prod
+    ],
+}));
 app.use(formData.parse());
-app.use(
-    bodyParser.json({
-        limit: '10kb',
-    }),
-);
-app.set('trust proxy', 1);
+app.use(bodyParser.json({ limit: '10kb' }));
 app.use(session(sessionOptions));
 app.use(requireJsonContent);
 
@@ -80,7 +84,7 @@ if (process.env.NODE_ENV === 'development') {
     });
 }
 
-app.use('/api', [
+app.use([
     products,
     profile,
     images,
@@ -88,7 +92,7 @@ app.use('/api', [
     users,
     bot,
 ]);
-app.get('/api/ping', (req, res) => {
+app.get('/ping', (req, res) => {
     res.sendStatus(204);
 });
 

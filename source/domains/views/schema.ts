@@ -3,25 +3,25 @@ import mongoose, { Document } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
 // Types
-import { ViewsCore } from './types'
+import { ViewsCore } from './types';
 
 export interface IViewsModel extends Document, ViewsCore {}
 
 // Document shape
 const schema = new mongoose.Schema({
     ipAdress: {
-        type: String,
+        type:     String,
         required: true,
-        index: true,
-        unique: true,
+        index:    true,
+        unique:   true,
     },
-    viewedProducts: [String],
+    viewedProducts: [ String ],
 }, {
     timestamps: {
         createdAt: 'created',
         updatedAt: 'modified',
     },
-    id: false,
+    id:         false,
     versionKey: false,
 });
 

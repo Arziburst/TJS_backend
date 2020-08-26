@@ -3,7 +3,7 @@ import mongoose, { Document } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
 // Types
-import { OrderCore } from './types'
+import { OrderCore } from './types';
 
 export interface IOrdersModel extends Document, OrderCore {}
 
@@ -12,37 +12,37 @@ const schema = new mongoose.Schema({
     orderedProducts: [
         {
             pid: {
-                type: String,
+                type:     String,
                 required: true,
             },
             image: {
-                type: String,
+                type:     String,
                 required: true,
             },
             price: {
-                type: Number,
+                type:     Number,
                 required: true,
             },
         },
     ],
     phone: {
-        type: String,
+        type:     String,
         required: true,
     },
     total: {
-        type: Number,
+        type:    Number,
         default: 0,
     },
-    uid: String,
-    email: String,
+    uid:     String,
+    email:   String,
     comment: String,
-    status: {
-        type: Number,
+    status:  {
+        type:    Number,
         default: 1,
     },
 }, {
     timestamps: { createdAt: 'created', updatedAt: false },
-    id: false,
+    id:         false,
     versionKey: false,
 });
 

@@ -15,7 +15,9 @@ export const getAll = async (req: Request, res: Response) => {
         const images = await Images.find();
         const foundedProducts = await Products.find();
 
-        const activeImagesArray = foundedProducts.reduce((acc, product) => [...acc, ...product.images], [] as Array<string>);
+        const activeImagesArray = foundedProducts.reduce(
+            (acc, product) => [ ...acc, ...product.images ], [] as Array<string>,
+        );
 
         const data = images.filter((image) => {
             if (activeImagesArray.includes(image.imageUrl)) {

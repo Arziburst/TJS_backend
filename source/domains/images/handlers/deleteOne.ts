@@ -14,7 +14,7 @@ export const deleteOne = async (req: Request, res: Response) => {
     try {
         const public_id = req.params.public_id;
 
-        const cloudinaryRes = await cloudinary.v2.api.delete_resources([public_id]);
+        const cloudinaryRes = await cloudinary.v2.api.delete_resources([ public_id ]);
 
         if (!cloudinaryRes) {
             throw new Error('Cloudinary Response fail.');
