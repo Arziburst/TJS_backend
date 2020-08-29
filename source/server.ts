@@ -37,7 +37,7 @@ cloudinary.config({
     api_secret: API_SECRET,
 });
 
-const ttl = 1000 * 60 * 60 * 24 * 7;
+const ttl = 1000 * 60 * 60 * 24 * 365;
 
 const sessionOptions: SessionOptions = {
     name:              'user',
