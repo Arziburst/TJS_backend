@@ -61,7 +61,7 @@
     "helmet": "^4.1.0",
     "js-yaml": "^3.14.0",
     "jsonwebtoken": "^8.5.1",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "mongoose": "^5.10.0",
     "mongoose-autopopulate": "^0.12.2",
     "mongoose-lean-virtuals": "^0.6.8",
