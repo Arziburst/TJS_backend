@@ -21,7 +21,7 @@ export const sayHello = async (req: Request, res: Response) => {
         });
 
         res.sendStatus(204);
-    } catch (error) {
+    } catch (error: any) {
         res.send(error);
     }
 };

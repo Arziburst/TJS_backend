@@ -14,7 +14,7 @@ export const getAll = async (req: Request, res: Response) => {
         const data = await Products.find();
 
         res.status(200).json({ data });
-    } catch (error) {
+    } catch (error: any) {
         res.status(400).json({ message: error.message });
     }
 };

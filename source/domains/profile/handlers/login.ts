@@ -40,7 +40,7 @@ export const login = async (req: IRequestWithSession, res: Response) => {
         req.session!.user = { _id };
 
         res.status(200).json({ data: profile });
-    } catch (error) {
+    } catch (error: any) {
         res.status(401).json({ message: error.message });
     }
 };

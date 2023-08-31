@@ -25,7 +25,7 @@ export const registration = async (req: RegistrationRequest, res: Response) => {
 
         req.session!.user = { _id };
         res.status(200).json({ data: profile });
-    } catch (error) {
+    } catch (error: any) {
         res.status(400).json({ message: error.message });
     }
 };

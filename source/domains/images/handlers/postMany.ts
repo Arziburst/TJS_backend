@@ -34,7 +34,7 @@ export const postMany = async (req: IRequest, res: Response) => {
         const mappedData = data.map(({ imageUrl, public_id }) => ({ imageUrl, public_id }));
 
         res.status(200).json({ data: mappedData });
-    } catch (error) {
+    } catch (error: any) {
         res.send(error);
     }
 };

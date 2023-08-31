@@ -20,7 +20,7 @@ export const deleteOne = async (req: Request, res: Response) => {
         }
 
         res.sendStatus(204);
-    } catch (error) {
+    } catch (error: any) {
         res.status(400).json({ message: error.message });
     }
 };

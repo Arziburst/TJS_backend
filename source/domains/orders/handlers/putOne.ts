@@ -28,7 +28,7 @@ export const putOne = async (req: IRequest, res: Response) => {
         const data = await Orders.findOneAndUpdate(_id, body);
 
         res.status(200).json({ data });
-    } catch (error) {
+    } catch (error: any) {
         res.status(400).json({ message: error.message });
     }
 };

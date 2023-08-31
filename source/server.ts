@@ -3,7 +3,7 @@ import express, { Request, Response, NextFunction, Application } from 'express';
 import session, { SessionOptions } from 'express-session';
 import helmet from 'helmet';
 import mongoose from 'mongoose';
-import connectMongo from 'connect-mongo';
+import MongoStore from 'connect-mongo';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import formData from 'express-form-data';
@@ -22,8 +22,6 @@ import './db';
 
 const app: Application = express();
 const debug = dg('server:init');
-
-const MongoStore = connectMongo(session);
 
 const {
     CLOUD_NAME,
@@ -45,8 +43,8 @@ const sessionOptions: SessionOptions = {
     resave:            false,
     rolling:           true,
     saveUninitialized: false,
-    store:             new MongoStore({
-        mongooseConnection: mongoose.connection,
+    store:             MongoStore.create({
+        mongoUrl: process.env.DB_URL,
         ttl,
     }),
     cookie: {

@@ -111,7 +111,7 @@ export const postOne = async (req: IRequest, res: Response) => {
         });
 
         res.status(201).json({ data: foundedOrder });
-    } catch (error) {
+    } catch (error: any) {
         res.status(400).json({ message: error.message });
     }
 };

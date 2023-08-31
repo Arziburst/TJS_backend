@@ -21,7 +21,7 @@ export const authorization = async (req: IRequestWithSession, res: Response) => 
         const profile = await Users.findById(req.session.user._id);
 
         res.status(200).json({ data: profile });
-    } catch (error) {
+    } catch (error: any) {
         res.status(401).json({ message: error.message });
     }
 };

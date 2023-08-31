@@ -23,7 +23,7 @@ export const postOne = async (req: IRequest, res: Response) => {
         const { _id } = await Users.register(body);
 
         res.status(201).json({ data: _id });
-    } catch (error) {
+    } catch (error: any) {
         res.status(400).json({ message: error.message });
     }
 };
