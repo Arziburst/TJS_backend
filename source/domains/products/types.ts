@@ -15,3 +15,9 @@ export interface ProductCore {
 export interface Product extends ProductCore {
     readonly _id: string;
 }
+
+export interface Pagination {
+    limit: number;
+    page: number;
+    isLowToHigh: string;
+}

@@ -9,3 +9,5 @@ export {
 } from './env';
 
 export { discountHandler } from './discountHandler';
+
+export * from './paginate';
