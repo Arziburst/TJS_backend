@@ -19,7 +19,7 @@ export const liqPaySchema = {
     type:       'object',
     properties: {
         amount: {
-            type: 'string',
+            type: 'number',
         },
         description: {
             type: 'string',

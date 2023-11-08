@@ -19,11 +19,7 @@ export const putOne = async (req: IRequest, res: Response) => {
     debug(`${req.method} — ${req.originalUrl}`);
 
     try {
-        const public_key = process.env.PUBLIC_KEY_LIQPAY;
-        const private_key = process.env.PRIVATE_KEY_LIQPAY;
-
         const _id = req.params._id;
-        console.log('putOne => _id:', _id);
 
         if (!_id) {
             throw new Error('Oreder put failed');

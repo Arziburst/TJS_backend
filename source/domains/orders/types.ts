@@ -1,5 +1,7 @@
 export type OrderedProduct = {
     readonly pid: string,
+    readonly title: string,
+    readonly available?: boolean,
     readonly image: string,
     readonly price: number,
 }

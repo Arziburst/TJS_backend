@@ -73,9 +73,11 @@ export const changeStatus = async (req: any, res: Response, next: Function) => {
                         orderedProducts: [
                             ...acc.orderedProducts,
                             {
-                                pid:   orderedProduct.pid,
-                                image: orderedProduct.image,
-                                price: orderedProduct.price,
+                                pid:       orderedProduct.pid,
+                                title:     orderedProduct.title,
+                                available: orderedProduct.available,
+                                image:     orderedProduct.image,
+                                price:     orderedProduct.price,
                             },
                         ],
                         total: acc.total + orderedProduct.price,
@@ -93,7 +95,7 @@ export const changeStatus = async (req: any, res: Response, next: Function) => {
                     text:       `Заказ: <a href ='http://tjstore.pp.ua/orders/${_id}'>${_id}</a>\nНа сумму: ${total} грн.\nКол-во: ${orderedProducts.length}\nСоздан: ${parsedCreated}\n${comment && `Комментарий: ${comment}\n`}Телефон: <a href='tel:${phone}'>${phone}</a>.`,
                 });
 
-                res.redirect(process.env.PUBLIC_URL + '/payment-success' || '');
+                res.redirect(process.env.PUBLIC_URL + `/payment-success?id=${_id}` || '');
 
                 return dataThen;
             }

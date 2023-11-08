@@ -44,9 +44,11 @@ export const postOne = async (req: IRequest, res: Response) => {
                 orderedProducts: [
                     ...acc.orderedProducts,
                     {
-                        pid:   foundedProductByPID._id,
-                        image: foundedProductByPID.images[ 0 ],
-                        price: foundedProductByPID.price,
+                        pid:       foundedProductByPID._id,
+                        title:     foundedProductByPID.title,
+                        available: foundedProductByPID.available,
+                        image:     foundedProductByPID.images[ 0 ],
+                        price:     foundedProductByPID.price,
                     },
                 ],
                 total: acc.total + foundedProductByPID.price,
