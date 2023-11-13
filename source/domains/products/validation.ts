@@ -13,9 +13,6 @@ export const productSchema = {
         price: {
             type: [ 'number', 'string' ],
         },
-        discount: {
-            type: [ 'number', 'string' ],
-        },
         available: {
             type: 'boolean',
         },

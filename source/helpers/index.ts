@@ -8,7 +8,5 @@ export {
     getCloudinaryEnv,
 } from './env';
 
-export { discountHandler } from './discountHandler';
-
 export * from './paginate';
 export * from './liqPay';
