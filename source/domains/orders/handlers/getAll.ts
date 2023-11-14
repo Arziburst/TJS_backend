@@ -32,9 +32,8 @@ export const getAll = async (req: GetAllOrders, res: Response) => {
             data = await Orders.findMany(userId);
         }
 
-        const filteredData = data.filter((order) => order.statusPayment === 'paid');
 
-        res.status(200).json({ data: filteredData });
+        res.status(200).json({ data });
     } catch (error: any) {
         res.status(400).json({ message: error.message });
     }

@@ -7,7 +7,6 @@ import { Order } from '../types';
 
 // Instruments
 import { Orders } from '../controller';
-import { LiqPay } from '../../../helpers';
 
 const debug = dg('router:orders:_id');
 
@@ -22,7 +21,7 @@ export const putOne = async (req: IRequest, res: Response) => {
         const _id = req.params._id;
 
         if (!_id) {
-            throw new Error('Oreder put failed');
+            throw new Error('Order put failed');
         }
 
         const body = req.body;
