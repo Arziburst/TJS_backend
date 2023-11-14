@@ -1,15 +1,10 @@
 // Core
 import { Response } from 'express';
-import moment from 'moment';
-import axios from 'axios';
 import dg from 'debug';
 
 // Types
 import { IRequestWithSession } from '../../../@interfaces';
 import { OrderCore, OrderedProduct } from '../types';
-
-// Helpers
-import { getTelegramApiUrl, getTelegramGroupId, discountHandler } from '../../../helpers';
 
 // Instruments
 import { Orders } from '../controller';
@@ -17,10 +12,6 @@ import { Products } from '../../products/controller';
 import { Users } from '../../users/controller';
 
 const debug = dg('router:orders');
-
-// Constants
-const TELEGRAM_API_URL = getTelegramApiUrl();
-const TELEGRAM_GROUP_ID = getTelegramGroupId();
 
 interface IRequest extends IRequestWithSession {
     body: {
@@ -41,8 +32,6 @@ export const postOne = async (req: IRequest, res: Response) => {
     try {
         const body = req.body;
         let data: OrderCore = {
-            comment:         body.comment,
-            phone:           body.phone,
             orderedProducts: [],
         };
         const sessionUID = req.session?.user?._id;
@@ -51,18 +40,18 @@ export const postOne = async (req: IRequest, res: Response) => {
         const { total, orderedProducts } = foundedProductsByPIDs.reduce((
             acc, foundedProductByPID,
         ) => {
-            const result = discountHandler(foundedProductByPID.price, foundedProductByPID.discount);
-
             return {
                 orderedProducts: [
                     ...acc.orderedProducts,
                     {
-                        pid:   foundedProductByPID._id,
-                        image: foundedProductByPID.images[ 0 ],
-                        price: result,
+                        pid:       foundedProductByPID._id,
+                        title:     foundedProductByPID.title,
+                        available: foundedProductByPID.available,
+                        image:     foundedProductByPID.images[ 0 ],
+                        price:     foundedProductByPID.price,
                     },
                 ],
-                total: acc.total + result,
+                total: acc.total + foundedProductByPID.price,
             };
         }, { total: 0, orderedProducts: [] } as ReduceResult);
 
@@ -99,16 +88,6 @@ export const postOne = async (req: IRequest, res: Response) => {
         if (!foundedOrder) {
             throw new Error('New order find failed');
         }
-
-        const { created, phone, comment, _id } = foundedOrder;
-        const parsedCreated = moment(created).locale('ru')
-            .format('MMMM Do YYYY, h:mm:ss a');
-
-        await axios.post(`${TELEGRAM_API_URL}/sendMessage`, {
-            chat_id:    TELEGRAM_GROUP_ID,
-            parse_mode: 'HTML',
-            text:       `Заказ: <a href ='http://tjstore.pp.ua/orders/${_id}'>${_id}</a>\nНа сумму: ${total} грн.\nКол-во: ${orderedProducts.length}\nСоздан: ${parsedCreated}\n${comment && `Комментарий: ${comment}\n`}Телефон: <a href='tel:${phone}'>${phone}</a>.`,
-        });
 
         res.status(201).json({ data: foundedOrder });
     } catch (error: any) {

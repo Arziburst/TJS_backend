@@ -7,6 +7,7 @@ import { Order } from '../types';
 
 // Instruments
 import { Orders } from '../controller';
+import { LiqPay } from '../../../helpers';
 
 const debug = dg('router:orders:_id');
 

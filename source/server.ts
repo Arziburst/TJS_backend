@@ -11,7 +11,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import dg from 'debug';
 
 // Routes
-import { products, images, users, bot, profile, orders } from './domains';
+import { cart, products, images, users, bot, profile, orders } from './domains';
 
 // Instruments
 import { getPassword, getCloudinaryEnv, NotFoundError, ValidationError } from './helpers';
@@ -61,9 +61,12 @@ app.use(cors({
     origin:      [
         'http://localhost',
         'http://localhost:3000', // dev
+        'http://localhost:3001', // dev
         'http://localhost:5000', // serve
         'http://192.168.99.100', // w10 docker
         'https://tjstore.pp.ua', // prod
+        'https://www.liqpay.ua/api/request',
+        'https://www.liqpay.ua/api/3/checkout',
     ],
 }));
 app.use(formData.parse());
@@ -84,6 +87,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use([
     products,
+    cart,
     profile,
     images,
     orders,

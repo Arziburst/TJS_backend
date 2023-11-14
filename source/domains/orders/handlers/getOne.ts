@@ -15,26 +15,26 @@ interface GetAllOrders extends IRequestWithSession {
     userRole?: string
 }
 
-export const getAll = async (req: GetAllOrders, res: Response) => {
+export const getOne = async (req: GetAllOrders, res: Response) => {
     debug(`${req.method} — ${req.originalUrl}`);
 
     try {
         if (!req.session?.user?._id) {
             throw new Error('session expired');
         }
+        const _id = req.params._id;
 
-        let data: Array<Order> = [];
-        const { _id: userId } = req.session.user;
-
-        if (req.userRole === 'admin') {
-            data = await Orders.find();
-        } else {
-            data = await Orders.findMany(userId);
+        if (!_id || _id.length < 1) {
+            throw new Error('params _id is not valid');
         }
 
-        const filteredData = data.filter((order) => order.statusPayment === 'paid');
+        if (req.userRole !== 'admin') {
+            throw new Error('you are not admin');
+        }
 
-        res.status(200).json({ data: filteredData });
+        const data = await Orders.findById(_id);
+
+        res.status(200).json({ data });
     } catch (error: any) {
         res.status(400).json({ message: error.message });
     }

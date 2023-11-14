@@ -3,7 +3,6 @@ export interface ProductCore {
     description: string;
     type: string;
     price: number;
-    discount: number;
     weight?: number;
     available?: boolean;
     images: Array<string>;
@@ -14,4 +13,10 @@ export interface ProductCore {
 
 export interface Product extends ProductCore {
     readonly _id: string;
+}
+
+export interface Pagination {
+    limit: number;
+    page: number;
+    isLowToHigh: string;
 }
