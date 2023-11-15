@@ -52,10 +52,6 @@ const schema = new mongoose.Schema({
         type:    Number,
         default: 1,
     },
-    statusPayment: {
-        type:    String,
-        default: 'not paid',
-    },
 }, {
     timestamps: { createdAt: 'created', updatedAt: false },
     id:         false,

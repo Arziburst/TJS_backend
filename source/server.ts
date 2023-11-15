@@ -61,12 +61,9 @@ app.use(cors({
     origin:      [
         'http://localhost',
         'http://localhost:3000', // dev
-        'http://localhost:3001', // dev
         'http://localhost:5000', // serve
         'http://192.168.99.100', // w10 docker
         'https://tjstore.pp.ua', // prod
-        'https://www.liqpay.ua/api/request',
-        'https://www.liqpay.ua/api/3/checkout',
     ],
 }));
 app.use(formData.parse());

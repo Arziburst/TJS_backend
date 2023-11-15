@@ -12,9 +12,6 @@ npm i
     API_KEY
     API_SECRET
     PASSWORD
-
-    PUBLIC_KEY_LIQPAY
-    PRIVATE_KEY_LIQPAY
 }
 
 npm run build

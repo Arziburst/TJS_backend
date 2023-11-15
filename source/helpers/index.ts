@@ -9,4 +9,3 @@ export {
 } from './env';
 
 export * from './paginate';
-export * from './liqPay';

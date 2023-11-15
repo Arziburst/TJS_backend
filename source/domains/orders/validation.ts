@@ -4,43 +4,27 @@ export const orderSchema = {
         orderedPIDs: {
             type: 'array',
         },
+        firstName: {
+            type: 'string',
+        },
+        lastName: {
+            type: 'string',
+        },
         phone: {
             type: 'string',
         },
-        comment: {
+        email: {
+            type: 'string',
+        },
+        city: {
+            type: 'string',
+        },
+        warehouse: {
             type: 'string',
         },
     },
-    required:             [ 'orderedPIDs' ],
-    additionalProperties: false,
-};
-
-export const liqPaySchema = {
-    type:       'object',
-    properties: {
-        amount: {
-            type: 'number',
-        },
-        description: {
-            type: 'string',
-        },
-        order_id: {
-            type: 'string',
-        },
-        result_url: {
-            type: 'string',
-        },
-        server_url: {
-            type: 'string',
-        },
-    },
-    required: [
-        'amount',
-        'description',
-        'order_id',
-        'result_url',
-    ],
-    additionalProperties: false,
+    required:             [ 'orderedPIDs', 'phone' ],
+    additionalProperties: true,
 };
 
 export const editOrderSchema = {

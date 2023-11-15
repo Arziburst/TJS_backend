@@ -1,6 +1,8 @@
 // Core
 import { Response } from 'express';
+import axios from 'axios';
 import dg from 'debug';
+import moment from 'moment';
 
 // Types
 import { IRequestWithSession } from '../../../@interfaces';
@@ -9,15 +11,27 @@ import { OrderCore, OrderedProduct } from '../types';
 // Instruments
 import { Orders } from '../controller';
 import { Products } from '../../products/controller';
-import { Users } from '../../users/controller';
+
+// Helpers
+import { getTelegramApiUrl } from '../../../helpers';
+import { getTelegramGroupId } from '../../../helpers';
+
+// Constants
+const TELEGRAM_API_URL = getTelegramApiUrl();
+const TELEGRAM_GROUP_ID = getTelegramGroupId();
 
 const debug = dg('router:orders');
 
 interface IRequest extends IRequestWithSession {
     body: {
-        phone: string;
-        comment: string;
         orderedPIDs: Array<string>;
+        firstName: string;
+        lastName: string;
+        phone: string;
+        email: string;
+        city: string;
+        warehouse: string;
+        comment?: string;
     };
 }
 
@@ -32,6 +46,12 @@ export const postOne = async (req: IRequest, res: Response) => {
     try {
         const body = req.body;
         let data: OrderCore = {
+            firstName:       body.firstName,
+            phone:           body.phone,
+            email:           body.email,
+            city:            body.city,
+            warehouse:       body.warehouse,
+            comment:         body.comment,
             orderedProducts: [],
         };
         const sessionUID = req.session?.user?._id;
@@ -62,15 +82,6 @@ export const postOne = async (req: IRequest, res: Response) => {
         };
 
         if (sessionUID) {
-            const foundedUser = await Users.findById(sessionUID);
-
-            if (foundedUser) {
-                data = {
-                    ...data,
-                    email: foundedUser.email,
-                };
-            }
-
             data = {
                 ...data,
                 uid: sessionUID,
@@ -88,6 +99,19 @@ export const postOne = async (req: IRequest, res: Response) => {
         if (!foundedOrder) {
             throw new Error('New order find failed');
         }
+
+
+        // Telegram notification
+        const { created, phone, comment, _id } = foundedOrder;
+
+        const parsedCreated = moment(created).locale('ru')
+            .format('MMMM Do YYYY, h:mm:ss a');
+
+        await axios.post(`${TELEGRAM_API_URL}/sendMessage`, {
+            chat_id:    TELEGRAM_GROUP_ID,
+            parse_mode: 'HTML',
+            text:       `Заказ: <a href ='http://tjstore.pp.ua/orders/${_id}'>${_id}</a>\nНа сумму: ${total} грн.\nКол-во: ${orderedProducts.length}\nСоздан: ${parsedCreated}\n${comment && `Комментарий: ${comment}\n`}Телефон: <a href='tel:${phone}'>${phone}</a>.`,
+        });
 
         res.status(201).json({ data: foundedOrder });
     } catch (error: any) {
