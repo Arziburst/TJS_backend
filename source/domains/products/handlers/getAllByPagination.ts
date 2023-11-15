@@ -24,7 +24,7 @@ export const getAllByPagination = async (
         const type = req.params.type;
         const query = req.query;
 
-        const foundData = await Products.findByType(type === 'see-all' ? null : type);
+        const foundData = await Products.findByType(type.toLocaleLowerCase() === 'see-all' ? null : type);
 
         const sortProductsByPrice = ({
             array,
