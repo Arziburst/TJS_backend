@@ -4,24 +4,57 @@ export const orderSchema = {
         orderedPIDs: {
             type: 'array',
         },
+        firstName: {
+            type: 'string',
+        },
+        lastName: {
+            type: 'string',
+        },
         phone: {
             type: 'string',
         },
-        comment: {
+        email: {
+            type: 'string',
+        },
+        city: {
+            type: 'string',
+        },
+        warehouse: {
             type: 'string',
         },
     },
-    required:             [ 'phone', 'orderedPIDs' ],
-    additionalProperties: false,
+    required:             [ 'orderedPIDs', 'phone' ],
+    additionalProperties: true,
 };
 
 export const editOrderSchema = {
     type:       'object',
     properties: {
+        firstName: {
+            type: 'string',
+        },
+        lastName: {
+            type: 'string',
+        },
+        phone: {
+            type: 'string',
+        },
+        email: {
+            type: 'string',
+        },
+        city: {
+            type: 'string',
+        },
+        warehouse: {
+            type: 'string',
+        },
+        comment: {
+            type: 'string',
+        },
         status: {
             type: 'number',
         },
     },
-    required:             [ 'status' ],
+    // required:             [ 'status' ],
     additionalProperties: false,
 };

@@ -15,6 +15,14 @@ const schema = new mongoose.Schema({
                 type:     String,
                 required: true,
             },
+            title: {
+                type:     String,
+                required: true,
+            },
+            available: {
+                type:     Boolean,
+                required: true,
+            },
             image: {
                 type:     String,
                 required: true,
@@ -25,18 +33,22 @@ const schema = new mongoose.Schema({
             },
         },
     ],
-    phone: {
+    firstName: String,
+    lastName:  String,
+    phone:     {
         type:     String,
-        required: true,
+        required: false,
     },
     total: {
         type:    Number,
         default: 0,
     },
-    uid:     String,
-    email:   String,
-    comment: String,
-    status:  {
+    uid:       String,
+    email:     String,
+    city:      String,
+    warehouse: String,
+    comment:   String,
+    status:    {
         type:    Number,
         default: 1,
     },

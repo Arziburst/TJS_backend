@@ -3,25 +3,24 @@ import { Request, Response } from 'express';
 import dg from 'debug';
 
 // Types
-import { User } from '../types';
+import { Cart } from '../types';
 
 // Instruments
-import { Users } from '../controller';
+import { Products } from '../../products/controller';
 
-const debug = dg('router:users:_id');
+const debug = dg('router:cart/check');
 
 interface IRequest extends Request {
-    body: User;
+    body: Cart;
 }
 
-export const putOne = async (req: IRequest, res: Response) => {
+export const check = async (req: IRequest, res: Response) => {
     debug(`${req.method} — ${req.originalUrl}`);
 
     try {
-        const _id = req.params._id;
-        const body = req.body;
+        const ids = req.body;
 
-        const data = await Users.findOneAndUpdate(_id, body);
+        const data = (await Products.findByIdsArray(ids)).map((product) => product._id);
 
         res.status(200).json({ data });
     } catch (error: any) {

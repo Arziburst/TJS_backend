@@ -7,7 +7,7 @@ export const requireJsonContent = (req: Request, res: Response, next: NextFuncti
 
     const contentType = req.headers[ 'content-type' ];
 
-    if (contentType !== 'application/json' && !/multipart/gm.test(contentType || '')) {
+    if (contentType !== 'application/json' && !/multipart/gm.test(contentType || '') && contentType !== 'application/x-www-form-urlencoded') {
         return res
             .status(400)
             .send(

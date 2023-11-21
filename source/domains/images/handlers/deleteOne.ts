@@ -27,7 +27,7 @@ export const deleteOne = async (req: Request, res: Response) => {
         }
 
         res.status(200).json({ data: public_id });
-    } catch (error) {
+    } catch (error: any) {
         res.send(error);
     }
 };

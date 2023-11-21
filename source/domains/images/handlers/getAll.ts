@@ -28,7 +28,7 @@ export const getAll = async (req: Request, res: Response) => {
         });
 
         res.status(200).json({ data });
-    } catch (error) {
+    } catch (error: any) {
         res.send(error);
     }
 };

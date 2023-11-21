@@ -26,7 +26,7 @@ export const logout = (req: IRequestWithSession, res: Response) => {
         } else {
             throw new Error('Something went wrong in logout');
         }
-    } catch (error) {
+    } catch (error: any) {
         res.status(422).json({ message: error.message });
     }
 };

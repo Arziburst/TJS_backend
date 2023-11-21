@@ -21,14 +21,14 @@ export const putOne = async (req: IRequest, res: Response) => {
         const _id = req.params._id;
 
         if (!_id) {
-            throw new Error('Oreder put failed');
+            throw new Error('Order put failed');
         }
 
         const body = req.body;
         const data = await Orders.findOneAndUpdate(_id, body);
 
         res.status(200).json({ data });
-    } catch (error) {
+    } catch (error: any) {
         res.status(400).json({ message: error.message });
     }
 };

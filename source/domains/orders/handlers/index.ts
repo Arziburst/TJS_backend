@@ -1,3 +1,4 @@
+export * from './getOne';
 export * from './getAll';
 export * from './postOne';
 export * from './putOne';

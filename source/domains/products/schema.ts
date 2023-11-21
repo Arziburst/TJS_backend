@@ -30,12 +30,6 @@ const schema = new mongoose.Schema({
         required: true,
         min:      [ 0, 'price can not be lower than zero' ],
     },
-    discount: {
-        type:     Number,
-        required: true,
-        min:      [ 0, 'discount can not be lower than zero' ],
-        max:      [ 50, 'discount can not be grater than 50' ],
-    },
     weight: {
         type:    Number,
         default: 0,

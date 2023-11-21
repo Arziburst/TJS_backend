@@ -1,5 +1,5 @@
 // Core
-import { connect, ConnectionOptions } from 'mongoose';
+import { connect, ConnectOptions } from 'mongoose';
 import dg from 'debug';
 
 // Instruments
@@ -8,15 +8,16 @@ import { getDbUrl } from '../helpers';
 const debug = dg('db');
 const DB_URL = getDbUrl();
 
-const mongooseOptions: ConnectionOptions = {
-    promiseLibrary:     global.Promise,
-    poolSize:           10,
-    keepAlive:          true,
-    connectTimeoutMS:   5000,
-    useNewUrlParser:    true,
-    useFindAndModify:   false,
-    useCreateIndex:     true,
-    useUnifiedTopology: true,
+const mongooseOptions: ConnectOptions = {
+    // promiseLibrary:   global.Promise, // Error
+    // poolSize:           10, // >v6 minPoolSize / maxPoolSize
+    maxPoolSize:      10,
+    keepAlive:        true,
+    connectTimeoutMS: 5000,
+    // useNewUrlParser:  true, // >v6 by default true
+    // useFindAndModify:   false, // >>v6 by default false
+    // useCreateIndex:     true, // >v6 by default true
+    // useUnifiedTopology: true, // >v6 by default true
 };
 
 const connection = connect(DB_URL, mongooseOptions);

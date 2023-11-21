@@ -15,7 +15,7 @@ export const deleteOne = async (req: Request, res: Response) => {
         await Products.findOneAndRemove(_id);
 
         res.status(200).json({ data: _id });
-    } catch (error) {
+    } catch (error: any) {
         res.status(400).json({ message: error.message });
     }
 };

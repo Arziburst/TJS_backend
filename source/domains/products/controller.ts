@@ -18,6 +18,15 @@ class ProductsController {
         return data;
     }
 
+    async findByType(type: string): Promise<Product[]> {
+        const data = await this.odm.find(type ? { type } : {})
+            .select('')
+            .sort({ created: -1 })
+            .lean({ virtuals: true });
+
+        return data;
+    }
+
     async find(): Promise<Product[]> {
         const data = await this.odm.find()
             .select('')

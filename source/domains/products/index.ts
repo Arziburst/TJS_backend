@@ -12,7 +12,9 @@ import { productSchema } from './validation';
 
 const route = express.Router();
 
+route.get('/products/:_id', methods.getOne);
 route.get('/products', methods.getAll);
+route.get('/products-pagination/:type', methods.getAllByPagination);
 route.post('/products', [ authenticate, checkRole('admin'), validator(productSchema) ], methods.postOne);
 route.put('/products/:_id', [ authenticate, checkRole('admin'), validator(productSchema) ], methods.putOne);
 route.delete('/products/:_id', [ authenticate, checkRole('admin') ], methods.deleteOne);
