@@ -67,7 +67,7 @@
     "mongoose-lean-virtuals": "^0.9.1",
     "mongodb-memory-server": "^8.15.1",
     "mongoose-unique-validator": "^4.0.0",
-    "node-telegram-bot-api": "^0.61.0",
+    "node-telegram-bot-api": "^0.64.0",
     "short-uuid": "^4.2.2",
     "uuid": "^9.0.0",
     "winston": "^3.10.0"
