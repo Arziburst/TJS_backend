@@ -1,7 +1,8 @@
 import { Request } from 'express';
+import { Session } from 'express-session';
 
 export interface IRequestWithSession extends Request {
-    session?: Express.Session & {
+    session: Session & {
         user?: { _id: string };
     };
 }
